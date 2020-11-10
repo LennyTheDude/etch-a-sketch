@@ -1,0 +1,1 @@
+This is my JavaScript Etch-a-Sketch project. It will help me practice my JS fundamentals as well as try out & better understand DOM manipulation.
