@@ -20,6 +20,7 @@ let itemWidth;
 drawGrid(gridSize);
 let colourControls = document.getElementById('colours');
 let newGrid = document.getElementById('new-grid');
+let clearGrid = document.getElementById('clear-grid');
 
 let mode = 'pure-black';
 
@@ -40,6 +41,8 @@ newGrid.addEventListener('click', function() { // redrawing
         window.alert('100 is a maximum size');
     }
 })
+
+clearGrid.addEventListener('click', function () { drawGrid(gridSize);})
 
 grid.addEventListener('pointerover', event => { // changing an item's color on mouse over
     if (event.target.className === 'item') {
