@@ -34,11 +34,13 @@ colourControls.addEventListener('click', event => { // change mode after 1 of th
 
 newGrid.addEventListener('click', function() { // redrawing 
     let size = document.getElementById('grid-size').value;    
-    if (size > 0 && size <= 100) {
+    if (size > 0 && size <= 100 && size %1 == 0) {
         gridSize = size;
         drawGrid(gridSize);  
     } else if (size > 100) {
         window.alert('100 is a maximum size');
+    } else if (size %1 !== 0) {
+        window.alert(`has to be an integer`);
     }
 })
 
