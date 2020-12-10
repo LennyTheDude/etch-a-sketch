@@ -21,6 +21,7 @@ drawGrid(gridSize);
 let colourControls = document.getElementById('colours');
 let newGrid = document.getElementById('new-grid');
 let clearGrid = document.getElementById('clear-grid');
+let drawSwitch = false;
 
 let mode = 'pure-black';
 
@@ -32,23 +33,22 @@ colourControls.addEventListener('click', event => { // change mode after 1 of th
     } 
 })
 
-newGrid.addEventListener('click', function() { // redrawing 
+newGrid.addEventListener('click', function() { // redrawing the grid
     let size = document.getElementById('grid-size').value;    
     if (size > 0 && size <= 100 && size %1 == 0) {
         gridSize = size;
         drawGrid(gridSize);  
     } else if (size > 100) {
-        window.alert('100 is a maximum size');
+        window.alert('100 is the maximum size');
     } else if (size %1 !== 0) {
         window.alert(`has to be an integer`);
     }
 })
 
-clearGrid.addEventListener('click', function () { drawGrid(gridSize);})
+clearGrid.addEventListener('click', function () { drawGrid(gridSize);});
 
 grid.addEventListener('pointerover', event => { // changing an item's color on mouse over
-    if (event.target.className === 'item') {
-        console.log(event.target.style.backgroundColor);
+    if (event.target.className === 'item' && drawSwitch === true) {
         switch (mode) {
             case 'pure-black':
                 event.target.style.backgroundColor = 'rgba(0, 0, 0, 1)';
@@ -61,8 +61,6 @@ grid.addEventListener('pointerover', event => { // changing an item's color on m
                 }
                 break;
             case 'random-colour':
-                //if I ever want to try better opacity w/colors
-                // event.target.style.backgroundColor = `rgba(${Math.random()*256},${Math.random()*256}, ${Math.random()*256}, ${Math.floor(Math.random()*10)/10})`;
                 event.target.style.backgroundColor = '#' + Math.floor(Math.random()*16777215).toString(16);
                 break;
             default:
@@ -70,4 +68,6 @@ grid.addEventListener('pointerover', event => { // changing an item's color on m
         }
     }
 });
+
+grid.addEventListener('click', function() { drawSwitch = !drawSwitch}); // start/end drawing after clicking inside the grid
 
